@@ -4,6 +4,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import LinkButton from './Button';
 import returnNumbers from '../algo'
 function TabPanel(props) {
@@ -40,6 +41,7 @@ function a11yProps(index) {
 }
 
 export default function BasicTabs(props) {
+    const [show, setShow] = useState(true)
     const [value, setValue] = React.useState(0);
     const [result] = useState(returnNumbers(props.players))
     console.log(result)
@@ -54,7 +56,7 @@ export default function BasicTabs(props) {
                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
                     {
                         result.map((item, index) => {
-                            return <Tab label={`${index + 1} player`} {...a11yProps(index)} />
+                            return <Tab label={`שחקן ${index + 1} `} {...a11yProps(index)} />
                         })
                     }
                 </Tabs>
@@ -62,9 +64,17 @@ export default function BasicTabs(props) {
             {
                 result.map((item, index) => {
                     return <TabPanel value={value} index={index}>
-                        <div>מספר כדור ראשון - {item[0]}</div>
-                        <div>מספר כדור שני - {item[1]}</div>
-                        <div>מספר כדור שלישי - {item[2]}</div>
+                        {show ?
+                            <div>
+                                <div>מספר כדור ראשון - {item[0]}</div>
+                                <div>מספר כדור שני - {item[1]}</div>
+                                <div>מספר כדור שלישי - {item[2]}</div></div> :
+                            <div></div>
+                        }
+
+                        <Button variant="contained" onClick={() => { setShow(!show) }}>
+                            {show ? "הסתר" : "גלה"}
+                        </Button>
                     </TabPanel>
                 })
             }

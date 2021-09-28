@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import LinkButton from './Button';
-import Button from '@mui/material/Button';
 
 import '../App.css'
 
