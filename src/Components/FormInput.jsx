@@ -4,6 +4,7 @@ import LinkButton from './Button';
 import '../App.css'
 
 const Validtion = (players) => {
+
     if (players > 5 || players < 2) {
         return false;
     }
@@ -19,7 +20,7 @@ export default function FormInput(props) {
                 </div>
                 <div>
                     <label > כמות משתתפים - </label>
-                    <input type="number" value={props.players} onChange={
+                    <input type="number" placeholder="3" value={props.players} onFocus={(e) => { e.target.value = "" }} onChange={
                         e => {
                             if (Validtion(e.target.value)) {
                                 props.setPlayers(e.target.value);
