@@ -20,7 +20,7 @@ export default function FormInput(props) {
                 </div>
                 <div>
                     <label > כמות משתתפים - </label>
-                    <input type="number" placeholder="2" value={props.players} onFocus={(e) => { e.target.value = "" }} onChange={
+                    <input type="number" value={props.players} onFocus={(e) => { e.target.value = "" }} onChange={
                         e => {
                             if (Validtion(e.target.value)) {
                                 props.setPlayers(e.target.value);
