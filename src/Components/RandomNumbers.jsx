@@ -6,6 +6,8 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import LinkButton from './Button';
+import Ball from './Ball';
+
 import returnNumbers from '../algo'
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -40,10 +42,10 @@ function a11yProps(index) {
     };
 }
 
-export default function BasicTabs(props) {
+export default function RandomNumbers(props) {
     const [show, setShow] = useState(true)
     const [value, setValue] = React.useState(0);
-    const [result] = useState(returnNumbers(props.players))
+    const [result] = useState(returnNumbers(props.players, props.sumBalls))
     console.log(result)
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -63,19 +65,24 @@ export default function BasicTabs(props) {
             </Box>
             {
                 result.map((item, index) => {
-                    return <TabPanel value={value} index={index}>
-                        {show ?
-                            <div>
-                                <div>מספר כדור ראשון - {item[0]}</div>
-                                <div>מספר כדור שני - {item[1]}</div>
-                                <div>מספר כדור שלישי - {item[2]}</div></div> :
-                            <div></div>
-                        }
+                    return (
+                        <TabPanel value={value} index={index}>
+                            {show ?
+                                <div className='result'> <h2>הכדורים הם -</h2>
+                                    <div className='balls'>
+                                        {item.map((ballValue) => {
+                                            return <Ball ballValue={ballValue} />
+                                        })}
+                                    </div>
+                                </div>
+                                : <div></div>
+                            }
 
-                        <Button variant="contained" onClick={() => { setShow(!show) }}>
-                            {show ? "הסתר" : "גלה"}
-                        </Button>
-                    </TabPanel>
+                            <Button variant="contained" onClick={() => { setShow(!show) }}>
+                                {show ? "הסתר" : "גלה"}
+                            </Button>
+                        </TabPanel>
+                    )
                 })
             }
         </Box>
